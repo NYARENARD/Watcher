@@ -53,7 +53,7 @@ class Watcher(Thread):
                 try:
                     if q[0]:
                         self.bot.sendMessage(self._log_channel, q[0])
-                        q[0].pop(0)
+                        q.pop(0)
                         time.sleep(1)
                 except Exception:
                     pass
