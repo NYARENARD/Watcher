@@ -50,10 +50,13 @@ class Watcher(Thread):
     def _watcher_launch(self):
         def buff_queueing():
             while True:
-                if q[0]:
-                    self.bot.sendMessage(self._log_channel, q[0])
-                    q[0].pop(0)
-                    time.sleep(1)
+                try:
+                    if q[0]:
+                        self.bot.sendMessage(self._log_channel, q[0])
+                        q[0].pop(0)
+                        time.sleep(1)
+                except Exception:
+                    pass
 
         def get_response():
             while True:
