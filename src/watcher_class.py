@@ -21,11 +21,13 @@ class Watcher(Thread):
         self._sock = socket.socket()
         self._server = 'irc.chat.twitch.tv'
         self._port = 6667
-
-        try:
-            self._sock.connect((self._server, self._port))
-        except Exception:
-            self._sock.connect((self._server, self._port))
+        
+        while True:
+            try:
+                self._sock.connect((self._server, self._port))
+                break
+            except Exception:
+                time.sleep(5)
 
         self._sock.send(f"PASS {self._ttv_token}\n".encode('utf-8'))
         self._sock.send(f"NICK {self._nickname}\n".encode('utf-8'))
