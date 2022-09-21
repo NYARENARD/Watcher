@@ -68,7 +68,7 @@ class Watcher(Thread):
                 elif len(resp) > 0:
                     try:
                         username, channel, message = re.search(':(.*)\!.*@.*\.tmi\.twitch\.tv PRIVMSG #(.*) :(.*)', resp).groups()
-                        payload = "{} | {} | {}".format(channel, username.rjust(20), message)
+                        payload = "`{} | {} | {}`".format(channel, username.rjust(20), message)
                         q.append(payload)
                     except Exception:
                         pass
