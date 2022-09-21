@@ -62,7 +62,12 @@ class Watcher(Thread):
 
         def get_response():
             while True:
-                resp = demojize(self._sock.recv(2048).decode('utf-8'))
+                while True:
+                    try:
+                        resp = demojize(self._sock.recv(2048).decode('utf-8'))
+                        break
+                    except Exception:
+                        time.sleep(1)
 
                 if resp.startswith('PING'):
                     self._sock.send("PONG\n".encode('utf-8'))
