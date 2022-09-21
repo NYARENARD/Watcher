@@ -1,0 +1,1 @@
+watcher: python src/main.py
