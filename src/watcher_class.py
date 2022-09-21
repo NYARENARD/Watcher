@@ -33,12 +33,13 @@ class Watcher(Thread):
         self._sock.send(f"NICK {self._nickname}\n".encode('utf-8'))
         for ch in self._ttv_channels:
             self._sock.send(f"JOIN {ch}\n".encode('utf-8'))
+        self._logging("`>>> Подключение успешно.`")
 
 
     def __del__(self):
         self._sock.close()
         self.bot.gateway.close()
-        self._logging("msg", "`>>> Соединение смотрящего сброшено.`")
+        self._logging("`>>> Соединение смотрящего сброшено.`")
 	
     def run(self):
         self._watcher_launch()
@@ -50,11 +51,12 @@ class Watcher(Thread):
             self.bot.sendFile(self._log_channel, url, isurl=True)
 
     def _watcher_launch(self):
+
         def buff_queueing():
             while True:
                 try:
                     if q[0]:
-                        self.bot.sendMessage(self._log_channel, q[0])
+                        self._logging(q[0])
                         q.pop(0)
                         time.sleep(1)
                 except Exception:
@@ -85,7 +87,5 @@ class Watcher(Thread):
         t1.start()
         t2 = Thread(target=get_response)
         t2.start()
-
-        
 
         self.bot.gateway.run(auto_reconnect=True)
