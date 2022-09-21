@@ -48,7 +48,7 @@ class Watcher(Thread):
             self.bot.sendFile(self._log_channel, url, isurl=True)
 
     def _watcher_launch(self):
-	def buff_queueing():
+        def buff_queueing():
             while True:
                 if q[0]:
                     self.bot.sendMessage(self._log_channel, q[0])
@@ -69,7 +69,7 @@ class Watcher(Thread):
                         q.append(payload)
                     except Exception:
                         pass
-		
+
         q = []
         t1 = Thread(target=buff_queueing)
         t1.start()
