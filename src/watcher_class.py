@@ -81,7 +81,7 @@ class Watcher(Thread):
                         tz_moscow = pytz.timezone('Europe/Moscow')
                         now = datetime.now(tz_moscow)
                         timestamp = "{}:{}:{} {}-{}-{}".format(now.hour, now.minute, now.second, now.day, now.month, now.year)
-                        payload = "`{} | {} | {} | {}`".format(channel, timestamp, username.rjust(20), message)
+                        payload = "`{} | {} | {} | {}`".format(channel, timestamp.rjust(19), username.rjust(20), message)
                         q.append(payload)
                     except Exception:
                         pass
