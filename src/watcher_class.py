@@ -34,7 +34,6 @@ class Watcher(Thread):
         self._sock.send(f"NICK {self._nickname}\n".encode('utf-8'))
         for ch in self._ttv_channels:
             self._sock.send(f"JOIN {ch}\n".encode('utf-8'))
-        self._logging("`>>> Подключение успешно.`")
 
 
     def __del__(self):
